@@ -39,3 +39,19 @@ $ python manage.py runserver
 ```bash
 $ python manage.py startapp escola
 ```
+
+**Instalando Django Rest Framework**
+```bash
+$ pip install djangorestframework
+$ pip install markdown       # Markdown support for the browsable API.
+```
+
+* No arquivo "settings.py" adicionar o app
+
+```python
+INSTALLED_APPS = [
+    ...
+    'rest_framework',
+]
+```
+
