@@ -11,6 +11,9 @@ $ python -m venv ./venv
 ```
 
 **Ativando o ambiente no Windows**
+
+[documentação venv](https://docs.python.org/pt-br/3/library/venv.html)
+
 ```bash
 $ venv\Scripts\activate
 ```
@@ -41,6 +44,9 @@ $ python manage.py startapp escola
 ```
 
 **Instalando Django Rest Framework**
+
+[https://www.django-rest-framework.org/](https://www.django-rest-framework.org/)
+
 ```bash
 $ pip install djangorestframework
 $ pip install markdown       # Markdown support for the browsable API.
