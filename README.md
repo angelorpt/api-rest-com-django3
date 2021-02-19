@@ -2,6 +2,8 @@
 
 ## Anotações do Curso
 
+### Ambiente de Desenvolvimento
+
 **Preparando o Ambiente**
 
 ```bash
@@ -26,3 +28,14 @@ $ django-admin startproject setup .
 * LANGUAGE_CODE = 'pt-br'
 * TIME_ZONE = 'America/Sao_Paulo'
 
+**Rodando o serviço**
+```bash
+$ python manage.py runserver
+```
+
+### Requisição GET
+
+**Criando um app**
+```bash
+$ python manage.py startapp escola
+```
