@@ -61,3 +61,72 @@ INSTALLED_APPS = [
 ]
 ```
 
+### Migrations
+
+**Criando as Migrations**
+```bash
+$ python manage.py makemigrations
+```
+
+**Executando as Migrations**
+```bash
+$ python manage.py migrate
+```
+
+### Models
+
+**Model de Aluno**
+```python
+from django.db import models
+
+class Aluno(models.Model):
+    nome = models.CharField(max_length=30)
+    rg   = models.CharField(max_length=9)
+    cpf  = models.CharField(max_length=11)
+    data_nascimento = models.DateField()
+
+    def __str__(self):
+        return self.nome
+```
+
+
+### Admin
+
+**Criando o SuperUser**
+
+```bash
+$ python manage.py createsuperuser
+```
+
+**Associando Model com Admin de Aluno**
+```python
+from django.contrib import admin
+from escola.models  import Aluno, Curso
+
+class Alunos(admin.ModelAdmin):
+    list_display       = ('id', 'nome', 'rg', 'cpf', 'data_nascimento')
+    list_display_links = ('id', 'nome')
+    search_fields      = ('nome',)
+    list_per_page      = 20
+
+admin.site.register(Aluno, Alunos)
+```
+
+
+### Serializer
+
+**Criando o serializer de aluno**
+```python
+from rest_framework import serializers
+from escola.models  import Aluno, Curso
+
+class AlunoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Aluno
+        fields = ['nome', 'rg', 'cpf', 'data_nascimento']
+
+class CursoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Curso
+        fields = '__all__'
+```
