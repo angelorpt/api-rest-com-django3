@@ -207,3 +207,18 @@ urlpatterns = [
 ]
 
 ```
+
+
+## Autenticando as requisições
+
+**Adicionando Basic Authentication**
+```python
+...
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions    import IsAuthenticated
+
+class AlunosViewSet(viewsets.ModelViewSet):
+    ...
+    authentication_classes = [BasicAuthentication]
+    permission_classes     = [IsAuthenticated]
+```
