@@ -168,3 +168,42 @@ urlpatterns = [
     path('', include(router.urls)),
 ]
 ```
+
+
+### Listando Matriculas de Um Aluno
+
+**Serializer.py**
+```python
+class ListaMatriculasAlunoSerializer(serializers.ModelSerializer):
+    curso   = serializers.ReadOnlyField(source='curso.descricao')
+    periodo = serializers.SerializerMethodField()
+    class Meta:
+        model  = Matricula
+        fields = ['id', 'curso', 'periodo']
+    def get_periodo(self, obj):
+        return obj.get_periodo_display()
+```
+
+**Views.py**
+```python
+from escola.serializer import ..., ListaMatriculasAlunoSerializer
+
+...
+class ListaMatriculasAluno(generics.ListAPIView):
+    """Listando as matrículas de um aluno"""
+    def get_queryset(self):
+        queryset = Matricula.objects.filter(aluno_id = self.kwargs['pk'])
+        return queryset
+    serializer_class = ListaMatriculasAlunoSerializer
+```
+
+**Urls.py**
+```python
+from escola.views import ..., ListaMatriculasAluno
+
+urlpatterns = [
+    ...
+    path('aluno/<int:pk>/matriculas/', ListaMatriculasAluno.as_view()),
+]
+
+```
