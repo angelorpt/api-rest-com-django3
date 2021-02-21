@@ -130,3 +130,41 @@ class CursoSerializer(serializers.ModelSerializer):
         model = Curso
         fields = '__all__'
 ```
+
+### Views - Classes para HTTP
+
+**Classes de comunicação entre o serializer e as requisições [views.py]**
+```python
+from rest_framework import viewsets
+from escola.models  import Aluno, Curso
+from serializer     import AlunoSerializer, CursoSerializer
+
+class AlunosViewSet(viewsets.ModelViewSet):
+    """Exibindo lista de alunos"""
+    queryset = Aluno.objects.all()
+    serializer_class = AlunoSerializer
+
+class CursoViewSet(viewsets.ModelViewSet):
+    """Exibindo lista de cursos"""
+    queryset = Curso.objects.all()
+    serializer_class = CursoSerializer
+```
+
+### Rotas - URLS
+
+**Configurando as rotas da API [urls.py]**
+```python
+from django.contrib import admin
+from django.urls    import path, include
+from escola.views   import AlunosViewSet, CursosViewSet
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register('alunos', AlunosViewSet, basename='Alunos')
+router.register('cursos', CursosViewSet, basename='Cursos')
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include(router.urls)),
+]
+```
